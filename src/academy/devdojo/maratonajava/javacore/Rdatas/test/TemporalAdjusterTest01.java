@@ -1,0 +1,54 @@
+package academy.devdojo.maratonajava.javacore.Rdatas.test;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.*;
+
+class ObterProximoDiaUtil implements TemporalAdjuster {
+    @Override
+    public Temporal adjustInto(Temporal temporal) {
+        DayOfWeek day = DayOfWeek.of(temporal.get(ChronoField.DAY_OF_WEEK));
+        int diaUtil;
+        switch (day) {
+            case THURSDAY:
+                diaUtil = 4;
+                break;
+            case FRIDAY:
+                diaUtil = 3;
+                break;
+            case SATURDAY:
+                diaUtil = 2;
+                break;
+            default:
+                diaUtil = 1;
+
+        }
+        return temporal.plus(diaUtil, ChronoUnit.DAYS);
+    }
+}
+
+public class TemporalAdjusterTest01 {
+    public static void main(String[] args) {
+        LocalDate now = LocalDate.now();
+        System.out.println(now);
+        System.out.println(now.getDayOfWeek());
+
+
+
+        now = LocalDate.now().withDayOfMonth(15).with(new ObterProximoDiaUtil());
+        System.out.println(now);
+        System.out.println(now.getDayOfWeek());
+
+        now = LocalDate.now().withDayOfMonth(17).with(new ObterProximoDiaUtil());
+        System.out.println(now);
+        System.out.println(now.getDayOfWeek());
+
+        now = LocalDate.now().withDayOfMonth(18).with(new ObterProximoDiaUtil());
+        System.out.println(now);
+        System.out.println(now.getDayOfWeek());
+
+        now = LocalDate.now().withDayOfMonth(20).with(new ObterProximoDiaUtil());
+        System.out.println(now);
+        System.out.println(now.getDayOfWeek());
+    }
+}
