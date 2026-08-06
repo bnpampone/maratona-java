@@ -10,6 +10,10 @@ public class Barco {
                 '}';
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public Barco(String nome) {
         this.nome = nome;
     }
